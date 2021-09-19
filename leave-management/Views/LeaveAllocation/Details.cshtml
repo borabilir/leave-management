@@ -1,0 +1,87 @@
+﻿@model leave_management.Models.ViewAllocationsViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details For - @Model.Employee.LastName, @Model.Employee.FirstName</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.UserName)&nbsp;
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.UserName)&nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.Email)&nbsp;
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Email)&nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.PhoneNumber)&nbsp;
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.PhoneNumber)&nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.FirstName)&nbsp;
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.FirstName)&nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.LastName)&nbsp;
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.LastName)&nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.TaxId)&nbsp;
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.TaxId)&nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.DateOfBirth)&nbsp;
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.DateOfBirth)&nbsp;
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.DateJoined)&nbsp;
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.DateJoined)&nbsp;
+        </dd>
+    </dl>
+</div>
+
+
+<hr />
+
+<h2>Leave Allocations</h2>
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th scope="col">Leave Type</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LeaveAllocations)
+        {
+        <tr>
+            <td class="col-sm-2"> @item.LeaveType.Name <span class="badge badge-secondary">@item.NumberOfDays</span></td>
+            <td class="col-sm-10"> <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning "><i class="fa fa-pencil"></i> Edit</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+<br />
+<div>
+    <a class="btn btn-outline-secondary btn-block" asp-action="Index">Back to List</a>
+</div>
