@@ -2,6 +2,7 @@ using leave_management.Contracts;
 using leave_management.Data;
 using leave_management.Mappings;
 using leave_management.Repository;
+using leave_management.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -29,9 +30,10 @@ namespace leave_management
                     Configuration.GetConnectionString("DefaultConnection")));
 
             //Add references for Repository and contracts to Startup file
-            services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
-            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
-            services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddSingleton<IEmailSender, EmailSender>();
 
             services.AddAutoMapper(typeof(Maps));
 
